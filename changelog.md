@@ -2,6 +2,7 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.1] - 2018-05-06
 ### Added
 - Based on Iris 10.6.3:https://github.com/kataras/iris/blob/master/HISTORY.md#we-02-may-2018--v1063
 
