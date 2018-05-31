@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.3] - 2018-05-31
 ### Added
 - Added env PORT variable support
 
