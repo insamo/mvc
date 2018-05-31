@@ -1,7 +1,7 @@
 package crypto_test
 
 import (
-	. "github.com/dorajistyle/goyangi/util/crypto"
+	. "github.com/insamo/mvc/utils/crypto"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

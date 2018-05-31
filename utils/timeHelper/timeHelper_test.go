@@ -3,7 +3,7 @@ package timeHelper_test
 import (
 	"time"
 
-	. "github.com/dorajistyle/goyangi/util/timeHelper"
+	. "github.com/insamo/mvc/utils/timeHelper"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

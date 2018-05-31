@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.4] - 2018-05-31
+### Removed
+- Removed unused utils
+
 ## [0.0.3] - 2018-05-31
 ### Added
 - Added env PORT variable support

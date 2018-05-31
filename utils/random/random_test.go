@@ -1,7 +1,7 @@
 package random_test
 
 import (
-	. "github.com/dorajistyle/goyangi/util/random"
+	. "github.com/insamo/mvc/utils/random"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
