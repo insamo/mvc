@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"strings"
 
-	. "github.com/dorajistyle/goyangi/util/stringHelper"
+	. "github.com/insamo/mvc/utils/stringHelper"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
