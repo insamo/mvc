@@ -3,7 +3,7 @@ package identity
 import (
 	"time"
 
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 
 	"github.com/kataras/iris"
 )
@@ -13,10 +13,12 @@ import (
 func New(b *bootstrap.Bootstrapper) iris.Handler {
 	return func(ctx iris.Context) {
 		// response headers
+		//TODO set ACCEPT
 		ctx.Header("App-Name", b.AppName)
 		ctx.Header("App-Owner", b.AppOwner)
 		ctx.Header("App-Since", time.Since(b.AppSpawnDate).String())
-		ctx.ContentType("application/json")
+		// TODO set from config contenttype
+		ctx.ContentType("application/json; charset=UTF-8")
 		ctx.Next()
 	}
 }

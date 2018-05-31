@@ -7,7 +7,7 @@ import (
 
 	"fmt"
 
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/kataras/iris/context"
 	"github.com/kataras/iris/middleware/logger"
 )
@@ -25,6 +25,10 @@ var excludeExtensions = [...]string{
 
 //func ConfigureRequestLogger(b *bootstrap.Bootstrapper) (h context.Handler, close func() error) {
 func ConfigureRequestLogger(b *bootstrap.Bootstrapper) {
+	if b.Environment.Core().GetString("request.log.level") == "disable" {
+		return
+	}
+
 	var err error
 	//close = func() error { return nil }
 

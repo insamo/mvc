@@ -1,7 +1,7 @@
 package cors
 
 import (
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/iris-contrib/middleware/cors"
 )
 
@@ -12,7 +12,7 @@ func Configure(b *bootstrap.Bootstrapper) {
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowCredentials: true,
 		AllowedMethods:   []string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"},
-		Debug:            true,
+		Debug:            false,
 	})
 	b.UseGlobal(crs)
 }

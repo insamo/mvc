@@ -1,6 +1,14 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added some utils
+- Added repository prepare
+- Added disable logging
+### Changed
+- Changed paginator
+- Changed name dialect
+- Changed query string
 
 ## [0.0.1] - 2018-05-06
 ### Added

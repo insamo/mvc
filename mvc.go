@@ -1,14 +1,14 @@
 package mvc
 
 import (
-	"bitbucket.org/insamo/mvc/core"
-	"bitbucket.org/insamo/mvc/logger"
-	"bitbucket.org/insamo/mvc/web/bootstrap"
-	"bitbucket.org/insamo/mvc/web/middleware/database"
-	"bitbucket.org/insamo/mvc/web/middleware/error_handler"
-	"bitbucket.org/insamo/mvc/web/middleware/identity"
-	"bitbucket.org/insamo/mvc/web/middleware/recover"
-	"bitbucket.org/insamo/mvc/web/routes"
+	"github.com/insamo/mvc/core"
+	"github.com/insamo/mvc/logger"
+	"github.com/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/middleware/database"
+	"github.com/insamo/mvc/web/middleware/error_handler"
+	"github.com/insamo/mvc/web/middleware/identity"
+	"github.com/insamo/mvc/web/middleware/recover"
+	"github.com/insamo/mvc/web/routes"
 )
 
 func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {

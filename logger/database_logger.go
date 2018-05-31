@@ -6,7 +6,7 @@ import (
 
 	"fmt"
 
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 )
 
 func ConfigureDatabaseLogger(b *bootstrap.Bootstrapper) {
