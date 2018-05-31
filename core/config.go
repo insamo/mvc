@@ -195,7 +195,16 @@ func (c *config) Addr(instance string) string {
 		return ""
 	}
 	s := c.conf.Sub(section)
-	return s.GetString("host") + ":" + s.GetString("port")
+
+	port := s.GetString("port")
+
+	// heroku
+	if port == "0" || port == "" {
+		s.BindEnv("PORT")
+		port = s.GetString("PORT")
+	}
+
+	return s.GetString("host") + ":" + port
 }
 
 func (c *config) Server(instance string) *viper.Viper {
