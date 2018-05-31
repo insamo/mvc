@@ -1,4 +1,4 @@
-package mssql
+package mssql2008
 
 import (
 	"fmt"

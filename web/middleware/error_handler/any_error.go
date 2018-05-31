@@ -1,7 +1,7 @@
 package error_handler
 
 import (
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 
 	"github.com/kataras/iris"
 )

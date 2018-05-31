@@ -3,8 +3,8 @@ package bootstrap
 import (
 	"time"
 
-	"bitbucket.org/insamo/mvc/core"
-	"bitbucket.org/insamo/mvc/datasource"
+	"github.com/insamo/mvc/core"
+	"github.com/insamo/mvc/datasource"
 
 	"os"
 

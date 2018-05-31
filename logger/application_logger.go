@@ -6,10 +6,14 @@ import (
 
 	"fmt"
 
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 )
 
 func ConfigureApplicationLogger(b *bootstrap.Bootstrapper) {
+	if b.Environment.Core().GetString("log.level") == "disable" {
+		return
+	}
+
 	filename := ""
 	if b.Environment.Core().GetString("log.level") == "debug" {
 		filename = b.Environment.Core().GetString("log.storage") + "/debug.app.log"

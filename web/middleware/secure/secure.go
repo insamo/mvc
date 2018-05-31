@@ -3,7 +3,7 @@ package secure
 import (
 	"time"
 
-	"bitbucket.org/insamo/mvc/web/bootstrap"
+	"github.com/insamo/mvc/web/bootstrap"
 
 	"github.com/iris-contrib/middleware/secure"
 	"github.com/kataras/iris"

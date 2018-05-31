@@ -8,11 +8,7 @@ import (
 )
 
 type QueryString struct {
-	Filter   string `json:"filter"`
-	FilterBy string `json:"filter_by"`
-
-	Sort     []string `json:"sort"`
-	Preloads []string `json:"preloads"`
+	Sort []string `json:"sort"`
 
 	PerPage int `json:"per_page"`
 	Page    int `json:"page"`
@@ -23,24 +19,15 @@ type QueryString struct {
 }
 
 func NewQueryString(context iris.Context) QueryString {
-	var q QueryString
-	var query = context.FormValues()
-	q.Query = query
+	q := QueryString{Query: context.FormValues()}
 
-	// Filter
-	if filter, ok := query["filter"]; ok {
-		q.Filter = filter[0]
-	}
-
-	// FilterBy
-	q.FilterBy = "id"
-	if filterBy, ok := query["filterBy"]; ok {
-		q.FilterBy = filterBy[0]
+	if q.Query == nil {
+		q.Query = make(map[string][]string)
 	}
 
 	// Sort
 	q.Sort = append(q.Sort, "id asc")
-	if sorts, ok := query["sort"]; ok {
+	if sorts, ok := q.Query["sort"]; ok {
 		// Clear sorts
 		q.Sort = q.Sort[:0]
 		for _, sort := range sorts {
@@ -55,16 +42,9 @@ func NewQueryString(context iris.Context) QueryString {
 		}
 	}
 
-	// Preloads relations
-	if preloads, ok := query["preloads"]; ok {
-		for _, preload := range preloads {
-			q.Preloads = append(q.Preloads, preload)
-		}
-	}
-
 	// Limit
 	q.PerPage = 15
-	if limit, ok := query["per_page"]; ok {
+	if limit, ok := q.Query["per_page"]; ok {
 		if limit[0] != "" {
 			q.PerPage, _ = strconv.Atoi(limit[0])
 		}
@@ -72,7 +52,7 @@ func NewQueryString(context iris.Context) QueryString {
 
 	// Offset
 	q.Page = 1
-	if offset, ok := query["page"]; ok {
+	if offset, ok := q.Query["page"]; ok {
 		q.Page, _ = strconv.Atoi(offset[0])
 		if q.Page == 0 {
 			q.Page = 1
@@ -83,8 +63,4 @@ func NewQueryString(context iris.Context) QueryString {
 	q.CurrPageURL = "http://" + context.Host() + context.Request().RequestURI
 
 	return q
-}
-
-func (q *QueryString) ProcessQuery(query map[string][]string) {
-
 }

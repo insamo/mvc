@@ -1,4 +1,4 @@
 mvc contributors
 ============================================
 
-* **[Arman Zhilkaidarov](https://bitbucket.org/insamo/)**
+* **[Arman Zhilkaidarov](https://github.com/insamo/)**
