@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.4] - 2018-05-31
 ### Removed
 - Removed unused utils
 
