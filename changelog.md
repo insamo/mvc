@@ -1,6 +1,10 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added sql query param constructor
+### Changed
+- Changed url params, now dividing sql and url params
 
 ## [0.0.4] - 2018-05-31
 ### Removed
