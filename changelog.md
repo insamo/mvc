@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.5] - 2018-06-01
 ### Added
 - Added sql query param constructor
 ### Changed
