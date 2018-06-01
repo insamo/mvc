@@ -2,6 +2,12 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.5] - 2018-06-01
+### Added
+- Added sql query param constructor
+### Changed
+- Changed url params, now dividing sql and url params
+
 ## [0.0.4] - 2018-05-31
 ### Removed
 - Removed unused utils

@@ -2,14 +2,11 @@ package binders
 
 import (
 	"strconv"
-	"strings"
 
 	"github.com/kataras/iris"
 )
 
 type QueryString struct {
-	Sort []string `json:"sort"`
-
 	PerPage int `json:"per_page"`
 	Page    int `json:"page"`
 
@@ -23,23 +20,6 @@ func NewQueryString(context iris.Context) QueryString {
 
 	if q.Query == nil {
 		q.Query = make(map[string][]string)
-	}
-
-	// Sort
-	q.Sort = append(q.Sort, "id asc")
-	if sorts, ok := q.Query["sort"]; ok {
-		// Clear sorts
-		q.Sort = q.Sort[:0]
-		for _, sort := range sorts {
-			s := strings.Split(sort, "|")
-			sortQuery := ""
-			if len(s) > 1 {
-				sortQuery = s[0] + " " + s[1]
-			} else {
-				sortQuery = s[0]
-			}
-			q.Sort = append(q.Sort, sortQuery)
-		}
 	}
 
 	// Limit
