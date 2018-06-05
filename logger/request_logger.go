@@ -38,6 +38,7 @@ func ConfigureRequestLogger(b *bootstrap.Bootstrapper) {
 		Method:  true,
 		Path:    true,
 		Columns: true,
+		Query:   true,
 	}
 
 	filename := ""
@@ -56,14 +57,6 @@ func ConfigureRequestLogger(b *bootstrap.Bootstrapper) {
 			}
 		}
 	}
-
-	//close = func() error {
-	//	err := logFile.Close()
-	//	if deleteFileOnExit {
-	//		err = os.Remove(logFile.Name())
-	//	}
-	//	return err
-	//}
 
 	c.LogFunc = func(now time.Time, latency time.Duration, status, ip, method, path string, message interface{}, headerMessage interface{}) {
 		line := fmt.Sprintf("%s | %v | %4v | %s | %s | %s", now.String(), status, latency, ip, method, path)
@@ -92,5 +85,4 @@ func ConfigureRequestLogger(b *bootstrap.Bootstrapper) {
 
 	h := logger.New(c)
 	b.UseGlobal(h)
-	//return
 }

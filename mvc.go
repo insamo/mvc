@@ -4,7 +4,6 @@ import (
 	"github.com/insamo/mvc/core"
 	"github.com/insamo/mvc/logger"
 	"github.com/insamo/mvc/web/bootstrap"
-	"github.com/insamo/mvc/web/middleware/database"
 	"github.com/insamo/mvc/web/middleware/error_handler"
 	"github.com/insamo/mvc/web/middleware/identity"
 	"github.com/insamo/mvc/web/middleware/recover"
@@ -25,17 +24,13 @@ func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {
 	app.Bootstrap(env)
 
 	app.Configure(
-		//etag.Configure,
-		// Middlewares
-		//jwt.Configure,
 		identity.Configure,
-		//cors.Configure,
 
 		logger.ConfigureApplicationLogger,
 		logger.ConfigureRequestLogger,
 		logger.ConfigureDatabaseLogger,
 
-		database.Configure,
+		//database.Configure,
 
 		// Be after all
 		routes.Configure,
