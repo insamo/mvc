@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.6] - 2018-06-05
 ### Added
 - Added scheduler
 - Added query params to request logger
