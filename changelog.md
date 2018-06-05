@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.7] - 2018-06-05
+### Fixed
+- Fixed database configure
+
 ## [0.0.6] - 2018-06-05
 ### Added
 - Added scheduler
