@@ -1,6 +1,13 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added scheduler
+- Added query params to request logger
+### Updated
+- Updated iris framework 10.6.6:https://github.com/kataras/iris/blob/master/HISTORY.md#tu-05-june-2018--v1066
+### Changed
+- Changed database packet location
 
 ## [0.0.5] - 2018-06-01
 ### Added

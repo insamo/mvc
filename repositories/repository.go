@@ -31,20 +31,6 @@ func NewSqlQuery(queryString binders.QueryString) SqlQuery {
 	return s
 }
 
-
-// TODO ParserParams
-//func ParseIn() {
-//	if v, ok := sqlQuery.Params["city"]; ok {
-//		if extras := cityRepo.GetExtrasByUUIDs(txExtra, v); extras != nil {
-//			for i := 0; i < len(extras); i++ {
-//				sqlQuery.Params["city"][i] = fmt.Sprintf("%d", extras[i].ID)
-//			}
-//		} else {
-//			delete(sqlQuery.Params, "city")
-//		}
-//	}
-//}
-
 func Prepare(query SqlQuery, db *gorm.DB) *gorm.DB {
 	db = db.Select("*, count(*) OVER() AS full_count")
 

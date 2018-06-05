@@ -10,6 +10,8 @@ import (
 
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
+	"github.com/rakanalh/scheduler"
+	"github.com/rakanalh/scheduler/storage"
 )
 
 type Configurator func(*Bootstrapper)
@@ -25,6 +27,7 @@ type Bootstrapper struct {
 	RequestContext     *context.Handler
 	TxFactory          map[string]datasource.TransactionFactory
 	Environment        core.Config
+	Scheduler          scheduler.Scheduler
 }
 
 // New returns a new Bootstrapper.
@@ -56,23 +59,13 @@ func (b *Bootstrapper) Configure(cs ...Configurator) {
 func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 	b.Environment = environment
 
-	//var refreshEvery = 10 * time.Second
-
-	//// same as:
-	//b.Use(func(ctx iris.Context) {
-	//	now := time.Now()
-	//	if modified, err := ctx.CheckIfModifiedSince(now.Add(-refreshEvery)); !modified && err == nil {
-	//		ctx.WriteNotModified()
-	//		return
-	//	}
-	//
-	//	ctx.SetLastModified(now)
-	//
-	//	ctx.Next()
-	//})
-
 	// Initialize transaction map
 	b.TxFactory = make(map[string]datasource.TransactionFactory)
+
+	// Initialize scheduler
+	s := storage.NewMemoryStorage()
+	b.Scheduler = scheduler.New(s)
+	b.Scheduler.Start()
 
 	return b
 }

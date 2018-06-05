@@ -22,20 +22,6 @@ import (
 	"github.com/kataras/golog"
 )
 
-func testConnection(driver string, dsn string) bool {
-	db, err := gorm.Open(driver, dsn)
-	defer db.Close()
-
-	if err != nil {
-		fmt.Print("* ")
-		return false
-	}
-
-	db.Close()
-
-	return true
-}
-
 // Configure creates a new identity middleware and registers that to the app.
 func Configure(b *bootstrap.Bootstrapper) {
 
@@ -90,6 +76,20 @@ func Configure(b *bootstrap.Bootstrapper) {
 
 		b.TxFactory[instance] = datasource.NewTransactionFactory(db, queries)
 	}
+}
+
+func testConnection(driver string, dsn string) bool {
+	db, err := gorm.Open(driver, dsn)
+	defer db.Close()
+
+	if err != nil {
+		fmt.Print("* ")
+		return false
+	}
+
+	db.Close()
+
+	return true
 }
 
 var (
