@@ -2,6 +2,7 @@ package mvc
 
 import (
 	"github.com/insamo/mvc/core"
+	"github.com/insamo/mvc/datasource/database"
 	"github.com/insamo/mvc/logger"
 	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/insamo/mvc/web/middleware/error_handler"
@@ -30,7 +31,7 @@ func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {
 		logger.ConfigureRequestLogger,
 		logger.ConfigureDatabaseLogger,
 
-		//database.Configure,
+		database.Configure,
 
 		// Be after all
 		routes.Configure,
