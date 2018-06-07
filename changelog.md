@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+### Removed
+- Removed default configs for database
+
 ## [0.0.7] - 2018-06-05
 ### Fixed
 - Fixed database configure

@@ -86,18 +86,7 @@ func setDefaults(v *viper.Viper) {
 				"owner": "owner",
 			},
 		},
-		"database": map[string]interface{}{ //TODO need to merge
-			"default": map[string]interface{}{
-				"driver":     "mssql",
-				"host":       "127.0.0.1",
-				"port":       1433,
-				"database":   "default",
-				"username":   "username",
-				"password":   "password",
-				"debug":      false,
-				"parameters": map[string]interface{}{},
-			},
-		},
+		"database": map[string]interface{}{},
 	}
 
 	for key, value := range defaults {
