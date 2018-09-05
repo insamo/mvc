@@ -7,5 +7,9 @@ import (
 func main() {
 	app := mvc.NewMVC()
 
+	app.Configure()
+
+	defer app.Close()
+
 	app.Listen()
 }

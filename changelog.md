@@ -2,6 +2,12 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.8] - 2018-09-05
+### Added
+- Added support for nosql(couchdb)
+### Removed
+- Removed default configs for database
+
 ## [0.0.7] - 2018-06-05
 ### Fixed
 - Fixed database configure

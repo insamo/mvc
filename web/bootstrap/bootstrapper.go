@@ -8,6 +8,7 @@ import (
 
 	"os"
 
+	"github.com/go-kivik/kivik"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
 	"github.com/rakanalh/scheduler"
@@ -26,6 +27,7 @@ type Bootstrapper struct {
 	DatabaseLogFile    *os.File
 	RequestContext     *context.Handler
 	TxFactory          map[string]datasource.TransactionFactory
+	NoSqlDB            map[string]kivik.DB
 	Environment        core.Config
 	Scheduler          scheduler.Scheduler
 }
@@ -61,6 +63,7 @@ func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 
 	// Initialize transaction map
 	b.TxFactory = make(map[string]datasource.TransactionFactory)
+	b.NoSqlDB = make(map[string]kivik.DB)
 
 	// Initialize scheduler
 	s := storage.NewMemoryStorage()
