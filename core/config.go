@@ -14,6 +14,8 @@ type Config interface {
 	DSN(instance string) string
 	Database(instance string) *viper.Viper
 	DatabaseInstances() []string
+	NoSqlInstances() []string
+	NoSql(instance string) *viper.Viper
 	Addr(instance string) string
 	Server(instance string) *viper.Viper
 	ServerInstances() []string
@@ -24,6 +26,7 @@ type config struct {
 	conf              viper.Viper
 	databaseInstances []string
 	serverInstances   []string
+	nosqlInstances    []string
 }
 
 func NewConfig() Config {
@@ -49,8 +52,9 @@ func NewConfig() Config {
 
 	databaseInstances := getInstances(c, "database")
 	serverInstances := getInstances(c, "server")
+	nosqlInstances := getInstances(c, "nosql")
 
-	return &config{*c, databaseInstances, serverInstances}
+	return &config{*c, databaseInstances, serverInstances, nosqlInstances}
 }
 
 func getInstances(v *viper.Viper, group string) []string {
@@ -87,6 +91,7 @@ func setDefaults(v *viper.Viper) {
 			},
 		},
 		"database": map[string]interface{}{},
+		"nosql":    map[string]interface{}{},
 	}
 
 	for key, value := range defaults {
@@ -100,6 +105,10 @@ func (c *config) Configurator() *viper.Viper {
 
 func (c *config) DatabaseInstances() []string {
 	return c.databaseInstances
+}
+
+func (c *config) NoSqlInstances() []string {
+	return c.nosqlInstances
 }
 
 func (c *config) ServerInstances() []string {
@@ -170,6 +179,16 @@ func (c *config) DSN(instance string) (dsn string) {
 
 func (c *config) Database(instance string) *viper.Viper {
 	section := "database." + instance
+	if !c.conf.IsSet(section) {
+		return nil
+	}
+	s := c.conf.Sub(section)
+
+	return s
+}
+
+func (c *config) NoSql(instance string) *viper.Viper {
+	section := "nosql." + instance
 	if !c.conf.IsSet(section) {
 		return nil
 	}

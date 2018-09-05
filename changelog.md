@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+### Added
+- Added support for nosql(couchdb)
+
 ### Removed
 - Removed default configs for database
 
