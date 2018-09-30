@@ -2,6 +2,12 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.9] - 2018-09-30
+### Changed
+- Changed nosql db factory to client factory
+### Fixed
+- Fixed sql query parse with no value
+
 ## [0.0.8] - 2018-09-05
 ### Added
 - Added support for nosql(couchdb)

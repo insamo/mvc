@@ -27,7 +27,7 @@ type Bootstrapper struct {
 	DatabaseLogFile    *os.File
 	RequestContext     *context.Handler
 	TxFactory          map[string]datasource.TransactionFactory
-	NoSqlDB            map[string]kivik.DB
+	CoachFactory       map[string]*kivik.Client
 	Environment        core.Config
 	Scheduler          scheduler.Scheduler
 }
@@ -63,7 +63,7 @@ func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 
 	// Initialize transaction map
 	b.TxFactory = make(map[string]datasource.TransactionFactory)
-	b.NoSqlDB = make(map[string]kivik.DB)
+	b.CoachFactory = make(map[string]*kivik.Client)
 
 	// Initialize scheduler
 	s := storage.NewMemoryStorage()
