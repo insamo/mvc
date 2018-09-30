@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.9] - 2018-09-30
 ### Changed
 - Changed nosql db factory to client factory
 ### Fixed
