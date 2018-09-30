@@ -23,7 +23,9 @@ func NewSqlQuery(queryString binders.QueryString) SqlQuery {
 	for k, v := range queryString.Query {
 		values := []string{}
 		for _, value := range v {
-			values = append(values, value)
+			if value != "" {
+				values = append(values, value)
+			}
 		}
 		s.Params[k] = values
 	}

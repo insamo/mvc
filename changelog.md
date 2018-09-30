@@ -1,6 +1,10 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Changed
+- Changed nosql db factory to client factory
+### Fixed
+- Fixed sql query parse with no value
 
 ## [0.0.8] - 2018-09-05
 ### Added

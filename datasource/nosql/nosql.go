@@ -23,8 +23,8 @@ func Configure(b *bootstrap.Bootstrapper) {
 		dsn := b.Environment.NoSql(instance).GetString("host") + ":" +
 			b.Environment.NoSql(instance).GetString("port")
 
-		fmt.Print("Test connection to database " + instance + " ")
-		golog.Debugf("Test connection to database " + instance + " success!")
+		fmt.Print("Test connection to server coach " + instance + " ")
+		golog.Debugf("Test connection to database coach" + instance + " success!")
 		fmt.Print("connected \n")
 
 		client, err := kivik.New(context.TODO(), driver, dsn)
@@ -33,12 +33,6 @@ func Configure(b *bootstrap.Bootstrapper) {
 			fmt.Errorf("Failed connect to nosql server: %s \n", err)
 		}
 
-		db, err := client.DB(context.TODO(), "schedule")
-		if err != nil {
-			golog.Errorf("Failed connect to database: %s \n", err)
-			fmt.Errorf("Failed connect to database: %s \n", err)
-		}
-
-		b.NoSqlDB[b.Environment.NoSql(instance).GetString("database")] = *db
+		b.CoachFactory[instance] = client
 	}
 }
