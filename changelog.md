@@ -1,6 +1,10 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added nosql(couchdb) datasource and pseudo transaction factory
+### Changed
+- Changed datasource structure
 
 ## [0.0.9] - 2018-09-30
 ### Changed

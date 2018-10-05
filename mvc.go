@@ -12,6 +12,7 @@ import (
 	"github.com/insamo/mvc/web/routes"
 )
 
+// NewMVC configurate and run
 func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {
 	// Load environment
 	env := core.NewConfig()

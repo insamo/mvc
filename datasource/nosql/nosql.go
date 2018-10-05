@@ -1,13 +1,12 @@
 package nosql
 
 import (
-	"context"
 	"fmt"
 
 	_ "github.com/go-kivik/couchdb"
-	"github.com/insamo/mvc/web/bootstrap"
-
 	"github.com/go-kivik/kivik"
+	"github.com/insamo/mvc/datasource/nosql/transactions"
+	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/kataras/golog"
 )
 
@@ -27,12 +26,13 @@ func Configure(b *bootstrap.Bootstrapper) {
 		golog.Debugf("Test connection to database coach" + instance + " success!")
 		fmt.Print("connected \n")
 
-		client, err := kivik.New(context.TODO(), driver, dsn)
+		client, err := kivik.New(driver, dsn)
+
 		if err != nil {
 			golog.Errorf("Failed connect to nosql server: %s \n", err)
 			fmt.Errorf("Failed connect to nosql server: %s \n", err)
 		}
 
-		b.CoachFactory[instance] = client
+		b.CoachFactory[instance] = nosql.NewTransactionFactory(client, nil)
 	}
 }
