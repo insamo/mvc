@@ -1,10 +1,10 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
-	"github.com/go-kivik/kivik"
+	"github.com/couchbase/gocb"
+
 	"github.com/insamo/mvc"
 )
 
@@ -15,9 +15,9 @@ func main() {
 
 	defer app.Close()
 
-	txExtra := app.CoachFactory["main"].BeginNewTransaction()
+	txExtra := app.NxFactory["couchbase"].BeginNewTransaction()
 
-	db := txExtra.DataSource("catalog").(*kivik.DB)
+	db := txExtra.DataSource("schedule-test").(*gocb.Bucket)
 
 	//
 	//db, err := client.DB(context.TODO(), "catalog")
@@ -31,7 +31,7 @@ func main() {
 		"name": "Insamo",
 	}
 
-	_, err := db.Put(context.TODO(), "1", doc)
+	_, err := db.Upsert("test", doc, 0)
 
 	fmt.Println(err)
 
