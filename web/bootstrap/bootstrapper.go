@@ -4,11 +4,11 @@ import (
 	"time"
 
 	"github.com/insamo/mvc/core"
-	"github.com/insamo/mvc/datasource"
 
 	"os"
 
-	"github.com/go-kivik/kivik"
+	"github.com/insamo/mvc/datasource/database/transactions"
+	"github.com/insamo/mvc/datasource/nosql/transactions"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
 	"github.com/rakanalh/scheduler"
@@ -26,8 +26,8 @@ type Bootstrapper struct {
 	RequestLogFile     *os.File
 	DatabaseLogFile    *os.File
 	RequestContext     *context.Handler
-	TxFactory          map[string]datasource.TransactionFactory
-	CoachFactory       map[string]*kivik.Client
+	TxFactory          map[string]database.TransactionFactory
+	CoachFactory       map[string]nosql.TransactionFactory
 	Environment        core.Config
 	Scheduler          scheduler.Scheduler
 }
@@ -62,8 +62,8 @@ func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 	b.Environment = environment
 
 	// Initialize transaction map
-	b.TxFactory = make(map[string]datasource.TransactionFactory)
-	b.CoachFactory = make(map[string]*kivik.Client)
+	b.TxFactory = make(map[string]database.TransactionFactory)
+	b.CoachFactory = make(map[string]nosql.TransactionFactory)
 
 	// Initialize scheduler
 	s := storage.NewMemoryStorage()
@@ -80,6 +80,8 @@ func (b *Bootstrapper) Close() {
 	b.RequestLogFile.Close()
 	b.DatabaseLogFile.Close()
 	b.ApplicationLogFile.Close()
+	b.Scheduler.Clear()
+	b.Scheduler.Stop()
 }
 
 // Listen starts the http server with the specified "addr".
