@@ -2,24 +2,27 @@ package nosql
 
 import (
 	"context"
+	"reflect"
+
+	"github.com/couchbase/gocb"
 
 	"github.com/go-kivik/kivik"
 )
 
-// Transaction interface for gorm
+// Transaction interface for nosql
 type Transaction interface {
 	Begin()                               // Begin transaction
 	Commit()                              // Commit transaction
 	Rollback()                            // Rollback transaction
 	DataSource(dbName string) interface{} // Get lowlevel db functions
-	Client() *kivik.Client
+	Client() interface{}
 	Queries() map[string]string     // Queries loaded from files
 	LookupQuery(name string) string // Get by name loaded from file query
 }
 
 type transaction struct {
 	Transaction
-	client  *kivik.Client
+	client  interface{}
 	queries map[string]string
 }
 
@@ -36,14 +39,25 @@ func (t *transaction) Rollback() {
 }
 
 func (t *transaction) DataSource(dbName string) interface{} {
-	db, err := t.client.DB(context.TODO(), dbName)
-	if err != nil {
-		return nil
+	if reflect.TypeOf(t.client) == reflect.TypeOf(&kivik.Client{}) {
+		db, err := t.client.(*kivik.Client).DB(context.TODO(), dbName)
+		if err != nil {
+			return nil
+		}
+		return db
 	}
-	return db
+	if reflect.TypeOf(t.client) == reflect.TypeOf(&gocb.Cluster{}) {
+		db, err := t.client.(*gocb.Cluster).OpenBucket(dbName, "")
+		if err != nil {
+			return nil
+		}
+		return db
+	}
+
+	return nil
 }
 
-func (t *transaction) Client() *kivik.Client {
+func (t *transaction) Client() interface{} {
 	return t.client
 }
 
@@ -55,22 +69,24 @@ func (t *transaction) LookupQuery(name string) string {
 	return query
 }
 
+// TransactionFactory interface
 type TransactionFactory interface {
 	BeginNewTransaction() Transaction
 	Close()
 }
 
 type transactionFactory struct {
-	client  *kivik.Client
+	client  interface{}
 	queries map[string]string
 }
 
-func NewTransactionFactory(client *kivik.Client, queries map[string]string) TransactionFactory {
+// NewTransactionFactory create transaction factory
+func NewTransactionFactory(client interface{}, queries map[string]string) TransactionFactory {
 	return &transactionFactory{client: client, queries: queries}
 }
 
 func (t transactionFactory) Close() {
-	//t.db.Close()
+
 }
 
 func (t transactionFactory) BeginNewTransaction() Transaction {

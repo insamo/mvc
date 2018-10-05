@@ -1,4 +1,4 @@
-package database
+package sql
 
 import "github.com/jinzhu/gorm"
 

@@ -7,16 +7,18 @@ import (
 
 	"os"
 
-	"github.com/insamo/mvc/datasource/database/transactions"
-	"github.com/insamo/mvc/datasource/nosql/transactions"
+	"github.com/insamo/mvc/datasource/transactions/nosql"
+	"github.com/insamo/mvc/datasource/transactions/sql"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
 	"github.com/rakanalh/scheduler"
 	"github.com/rakanalh/scheduler/storage"
 )
 
+// Configurator func
 type Configurator func(*Bootstrapper)
 
+// Bootstrapper struct
 type Bootstrapper struct {
 	*iris.Application
 	AppName            string
@@ -26,8 +28,8 @@ type Bootstrapper struct {
 	RequestLogFile     *os.File
 	DatabaseLogFile    *os.File
 	RequestContext     *context.Handler
-	TxFactory          map[string]database.TransactionFactory
-	CoachFactory       map[string]nosql.TransactionFactory
+	TxFactory          map[string]sql.TransactionFactory
+	NxFactory          map[string]nosql.TransactionFactory
 	Environment        core.Config
 	Scheduler          scheduler.Scheduler
 }
@@ -62,8 +64,8 @@ func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 	b.Environment = environment
 
 	// Initialize transaction map
-	b.TxFactory = make(map[string]database.TransactionFactory)
-	b.CoachFactory = make(map[string]nosql.TransactionFactory)
+	b.TxFactory = make(map[string]sql.TransactionFactory)
+	b.NxFactory = make(map[string]nosql.TransactionFactory)
 
 	// Initialize scheduler
 	s := storage.NewMemoryStorage()
@@ -73,6 +75,7 @@ func (b *Bootstrapper) Bootstrap(environment core.Config) *Bootstrapper {
 	return b
 }
 
+// Close bootstraper
 func (b *Bootstrapper) Close() {
 	for _, instance := range b.Environment.DatabaseInstances() {
 		b.TxFactory[instance].Close()

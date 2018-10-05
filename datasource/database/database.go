@@ -13,14 +13,14 @@ import (
 	"unicode"
 
 	"github.com/insamo/mvc/datasource"
+	"github.com/insamo/mvc/datasource/transactions/sql"
 
-	_ "github.com/insamo/mvc/dialect/mssql2008"
+	_ "github.com/insamo/mvc/dialect/mssql2008" // init
 	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/postgres" // init
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
-	"github.com/insamo/mvc/datasource/database/transactions"
 	"github.com/kataras/golog"
 )
 
@@ -75,7 +75,7 @@ func Configure(b *bootstrap.Bootstrapper) {
 		queries := scanner.Run(bufio.NewScanner(f))
 		f.Close()
 
-		b.TxFactory[instance] = database.NewTransactionFactory(db, queries)
+		b.TxFactory[instance] = sql.NewTransactionFactory(db, queries)
 	}
 }
 

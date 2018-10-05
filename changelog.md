@@ -3,8 +3,11 @@
 ## [Unreleased][unreleased]
 ### Added
 - Added nosql(couchdb) datasource and pseudo transaction factory
+- Added nosql(couchbase) datasource
 ### Changed
 - Changed datasource structure
+- Changed NoSql transaction factory
+- Changed datasource package structure
 
 ## [0.0.9] - 2018-09-30
 ### Changed
