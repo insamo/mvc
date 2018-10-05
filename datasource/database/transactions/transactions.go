@@ -1,4 +1,4 @@
-package datasource
+package transactions
 
 import "github.com/jinzhu/gorm"
 
