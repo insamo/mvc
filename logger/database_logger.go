@@ -10,6 +10,9 @@ import (
 )
 
 func ConfigureDatabaseLogger(b *bootstrap.Bootstrapper) {
+	if b.Environment.Core().GetString("log.level") == "disable" {
+		return
+	}
 	filename := ""
 	if b.Environment.Core().GetString("log.level") == "debug" {
 		filename = b.Environment.Core().GetString("log.storage") + "/debug.database.log"
