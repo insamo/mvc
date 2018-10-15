@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [0.0.10] - 2018-10-15
 ### Added
 - Added nosql(couchdb) datasource and pseudo transaction factory
 - Added nosql(couchbase) datasource
