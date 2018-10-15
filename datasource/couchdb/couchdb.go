@@ -1,17 +1,15 @@
-package nosql
+package couchdb
 
 import (
-	"context"
 	"fmt"
 
-	_ "github.com/go-kivik/couchdb"
-	"github.com/insamo/mvc/web/bootstrap"
-
+	_ "github.com/go-kivik/couchdb" // init
 	"github.com/go-kivik/kivik"
+	"github.com/insamo/mvc/datasource/transactions/nosql"
+	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/kataras/golog"
 )
 
-// TODO need error handling
 // Configure creates a new identity middleware and registers that to the app.
 func Configure(b *bootstrap.Bootstrapper) {
 
@@ -20,19 +18,20 @@ func Configure(b *bootstrap.Bootstrapper) {
 	for _, instance := range instances {
 		driver := b.Environment.NoSql(instance).GetString("driver")
 
+		if driver != "couch" {
+			continue
+		}
+
 		dsn := b.Environment.NoSql(instance).GetString("host") + ":" +
 			b.Environment.NoSql(instance).GetString("port")
 
-		fmt.Print("Test connection to server coach " + instance + " ")
-		golog.Debugf("Test connection to database coach" + instance + " success!")
-		fmt.Print("connected \n")
+		c, err := kivik.New(driver, dsn)
 
-		client, err := kivik.New(context.TODO(), driver, dsn)
 		if err != nil {
 			golog.Errorf("Failed connect to nosql server: %s \n", err)
 			fmt.Errorf("Failed connect to nosql server: %s \n", err)
 		}
 
-		b.CoachFactory[instance] = client
+		b.NxFactory[instance] = nosql.NewTransactionFactory(c, nil)
 	}
 }

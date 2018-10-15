@@ -1,11 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
+	"github.com/couchbase/gocb"
+
 	"github.com/insamo/mvc"
-	"github.com/kataras/golog"
 )
 
 func main() {
@@ -15,18 +15,23 @@ func main() {
 
 	defer app.Close()
 
-	db, err := app.CoachFactory["main"].DB(context.TODO(), "catalog")
-	if err != nil {
-		golog.Errorf("Failed connect to database: %s \n", err)
-		fmt.Errorf("Failed connect to database: %s \n", err)
-	}
+	txExtra := app.NxFactory["couchbase"].BeginNewTransaction()
 
+	db := txExtra.DataSource("schedule-test").(*gocb.Bucket)
+
+	//
+	//db, err := client.DB(context.TODO(), "catalog")
+	//if err != nil {
+	//	golog.Errorf("Failed connect to database: %s \n", err)
+	//	fmt.Errorf("Failed connect to database: %s \n", err)
+	//}
+	//
 	doc := map[string]interface{}{
 		"_id":  "username",
 		"name": "Insamo",
 	}
 
-	_, err = db.Put(context.TODO(), "1", doc)
+	_, err := db.Upsert("test", doc, 0)
 
 	fmt.Println(err)
 

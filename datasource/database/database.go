@@ -13,10 +13,12 @@ import (
 	"unicode"
 
 	"github.com/insamo/mvc/datasource"
-	_ "github.com/insamo/mvc/dialect/mssql2008"
+	"github.com/insamo/mvc/datasource/transactions/sql"
+
+	_ "github.com/insamo/mvc/dialect/mssql2008" // init
 	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/postgres" // init
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
 	"github.com/kataras/golog"
@@ -24,7 +26,6 @@ import (
 
 // Configure creates a new identity middleware and registers that to the app.
 func Configure(b *bootstrap.Bootstrapper) {
-
 	instances := b.Environment.DatabaseInstances()
 
 	for _, instance := range instances {
@@ -74,7 +75,7 @@ func Configure(b *bootstrap.Bootstrapper) {
 		queries := scanner.Run(bufio.NewScanner(f))
 		f.Close()
 
-		b.TxFactory[instance] = datasource.NewTransactionFactory(db, queries)
+		b.TxFactory[instance] = sql.NewTransactionFactory(db, queries)
 	}
 }
 

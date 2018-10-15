@@ -2,6 +2,22 @@
 
 ## [Unreleased][unreleased]
 
+## [0.0.10] - 2018-10-15
+### Added
+- Added nosql(couchdb) datasource and pseudo transaction factory
+- Added nosql(couchbase) datasource
+- Added sliceHelper package
+### Changed
+- Changed datasource structure
+- Changed NoSql transaction factory
+- Changed datasource package structure
+### Fixed
+- Fixed paginator.CurrentPage zero value
+- Fixed database configure logger disable statement
+- Fixed query string empty value
+- Fixed query string page value calculation
+
+
 ## [0.0.9] - 2018-09-30
 ### Changed
 - Changed nosql db factory to client factory

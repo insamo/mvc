@@ -2,8 +2,9 @@ package mvc
 
 import (
 	"github.com/insamo/mvc/core"
+	"github.com/insamo/mvc/datasource/couchbase"
+	"github.com/insamo/mvc/datasource/couchdb"
 	"github.com/insamo/mvc/datasource/database"
-	"github.com/insamo/mvc/datasource/nosql"
 	"github.com/insamo/mvc/logger"
 	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/insamo/mvc/web/middleware/error_handler"
@@ -12,6 +13,7 @@ import (
 	"github.com/insamo/mvc/web/routes"
 )
 
+// NewMVC configurate and run
 func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {
 	// Load environment
 	env := core.NewConfig()
@@ -33,7 +35,8 @@ func NewMVC(cfgs ...bootstrap.Configurator) *bootstrap.Bootstrapper {
 		logger.ConfigureDatabaseLogger,
 
 		database.Configure,
-		nosql.Configure,
+		couchdb.Configure,
+		couchbase.Configure,
 
 		// Be after all
 		routes.Configure,

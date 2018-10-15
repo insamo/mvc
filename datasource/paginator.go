@@ -34,6 +34,10 @@ func NewPaginate(data interface{}, total int, query interface{}) Paginator {
 		}
 	)
 
+	if p.CurrentPage == 0 {
+		p.CurrentPage = 1
+	}
+
 	// LastPage
 	p.LastPage = int64(
 		math.Ceil(float64(p.Total) / float64(p.PerPage)),

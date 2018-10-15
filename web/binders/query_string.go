@@ -22,6 +22,16 @@ func NewQueryString(context iris.Context) QueryString {
 		q.Query = make(map[string][]string)
 	}
 
+	// Remove empty query params
+	for k, v := range q.Query {
+		for i := 0; i < len(v); i++ {
+			if v[i] == "" {
+				v = append(v[:i], v[i+1:]...)
+			}
+		}
+		q.Query[k] = v
+	}
+
 	// Limit
 	q.PerPage = 15
 	if limit, ok := q.Query["per_page"]; ok {
@@ -38,6 +48,7 @@ func NewQueryString(context iris.Context) QueryString {
 			q.Page = 1
 		}
 	}
+	q.Page = (q.Page - 1) * q.PerPage
 
 	// Current page url
 	q.CurrPageURL = "http://" + context.Host() + context.Request().RequestURI
