@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+## Added
+- Added queries reader to nosql transaction
 
 ## [0.0.10] - 2018-10-15
 ### Added
