@@ -1,10 +1,13 @@
 package couchdb
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 
 	_ "github.com/go-kivik/couchdb" // init
 	"github.com/go-kivik/kivik"
+	"github.com/insamo/mvc/datasource"
 	"github.com/insamo/mvc/datasource/transactions/nosql"
 	"github.com/insamo/mvc/web/bootstrap"
 	"github.com/kataras/golog"
@@ -32,6 +35,16 @@ func Configure(b *bootstrap.Bootstrapper) {
 			fmt.Errorf("Failed connect to nosql server: %s \n", err)
 		}
 
-		b.NxFactory[instance] = nosql.NewTransactionFactory(c, nil)
+		// Loading queries
+		f, err := os.Open("storage/database/queries.nosql")
+		if err != nil {
+			golog.Errorf("Failed to open nosql queries file: %s \n", err)
+			fmt.Errorf("Failed to open nosql queries file: %s \n", err)
+		}
+		scanner := &datasource.Scanner{}
+		queries := scanner.Run(bufio.NewScanner(f))
+		f.Close()
+
+		b.NxFactory[instance] = nosql.NewTransactionFactory(c, queries)
 	}
 }

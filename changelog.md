@@ -2,6 +2,15 @@
 
 ## [Unreleased][unreleased]
 
+
+## [0.0.11] - 2018-11-02
+### Added
+- Added queries reader to nosql transaction
+- Added ping response
+### Removed
+- Removed scheduler clear when close
+- Removed test from index
+
 ## [0.0.10] - 2018-10-15
 ### Added
 - Added nosql(couchdb) datasource and pseudo transaction factory
