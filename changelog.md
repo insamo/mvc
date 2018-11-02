@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+
+## [0.0.11] - 2018-11-02
 ### Added
 - Added queries reader to nosql transaction
 - Added ping response
