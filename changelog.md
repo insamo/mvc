@@ -1,8 +1,12 @@
 # Change Log
 
 ## [Unreleased][unreleased]
-## Added
+### Added
 - Added queries reader to nosql transaction
+- Added ping response
+### Removed
+- Removed scheduler clear when close
+- Removed test from index
 
 ## [0.0.10] - 2018-10-15
 ### Added

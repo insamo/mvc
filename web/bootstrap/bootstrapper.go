@@ -83,8 +83,8 @@ func (b *Bootstrapper) Close() {
 	b.RequestLogFile.Close()
 	b.DatabaseLogFile.Close()
 	b.ApplicationLogFile.Close()
-	b.Scheduler.Clear()
-	b.Scheduler.Stop()
+	// b.Scheduler.Clear()
+	// b.Scheduler.Stop()
 }
 
 // Listen starts the http server with the specified "addr".
