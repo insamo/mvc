@@ -14,7 +14,7 @@ func New(b *bootstrap.Bootstrapper) *jwtmiddleware.Middleware {
 			return []byte(b.Environment.Core().GetString("secure.key")), nil
 		},
 		SigningMethod: jwt.SigningMethodHS256,
-		Debug:         true,
+		Debug:         false,
 	})
 	return jwtHandler
 }
