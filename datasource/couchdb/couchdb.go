@@ -2,6 +2,7 @@ package couchdb
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"os"
 
@@ -28,7 +29,7 @@ func Configure(b *bootstrap.Bootstrapper) {
 		dsn := b.Environment.NoSql(instance).GetString("host") + ":" +
 			b.Environment.NoSql(instance).GetString("port")
 
-		c, err := kivik.New(driver, dsn)
+		c, err := kivik.New(context.TODO(), driver, dsn)
 
 		if err != nil {
 			golog.Errorf("Failed connect to nosql server: %s \n", err)
