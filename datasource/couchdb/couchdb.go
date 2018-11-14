@@ -7,7 +7,7 @@ import (
 	"os"
 
 	_ "github.com/go-kivik/couchdb" // init
-	"github.com/go-kivik/kivik"
+	"github.com/flimzy/kivik"
 	"github.com/insamo/mvc/datasource"
 	"github.com/insamo/mvc/datasource/transactions/nosql"
 	"github.com/insamo/mvc/web/bootstrap"

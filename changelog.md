@@ -3,6 +3,11 @@
 ## [Unreleased][unreleased]
 
 
+## [0.0.14] - 2018-11-14
+### Changed
+- Changed go-kivik to flimzy kivik
+- Changed dependencies
+
 ## [0.0.11] - 2018-11-02
 ### Added
 - Added queries reader to nosql transaction
