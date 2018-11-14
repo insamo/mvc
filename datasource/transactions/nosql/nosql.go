@@ -6,7 +6,7 @@ import (
 
 	"github.com/couchbase/gocb"
 
-	"github.com/go-kivik/kivik"
+	"github.com/flimzy/kivik"
 )
 
 // Transaction interface for nosql
