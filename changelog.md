@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+
+## [0.0.14] - 2018-11-14
 ### Changed
 - Changed go-kivik to flimzy kivik
 - Changed dependencies
